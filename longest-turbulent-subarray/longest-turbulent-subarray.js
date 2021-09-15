@@ -3,54 +3,22 @@
  * @return {number}
  */
 var maxTurbulenceSize = function(arr) {
-    //if index is odd, its greater, if its even, its less
     
-    //need to check if its consecutive
-    const checker = (array) => {
-        let count = 0;
-        let indexer = [-1];
-        
-        if(array.length <= 1) {
-            return 1;
+    let start = 0;
+    let result = 0;
+    
+    let t = arr.every((d)=> d == arr[0]);// if all the number are same return 1 
+    if(t)return 1;
+    
+    
+    if(arr.length == 1)return 1
+    for(let i =1; i <arr.length; i++){
+        //signs are not different so its not turbulent so adjust the window
+        if(i == arr.length-1 || (arr[i] - arr[i-1]) * (arr[i+1]- arr[i]) >=0){
+            result = Math.max(result, i - start+1);
+            start =i 
         }
-        for(var i = 0; i < array.length; i++) {
-            if(i % 2 === 0 && array[i] < array[i + 1]) {
-                count++;
-            } else if(i % 2 === 1 && array[i] > array[i + 1]) {
-                count++;
-            } else {
-                indexer.push(i);
-            }
-        }
-        console.log(indexer);
-        let max = 0
-        for(var j = 0; j < indexer.length; j++) {
-            if((indexer[j + 1] - indexer[j]) > max) {
-                max = indexer[j + 1] - indexer[j]
-            }
-        }
-        return max;
     }
     
-    //console.log('normal', checker(arr), 'reverse', checker(arr.reverse()));
-    
-    
-    let reverseArray = arr.map((item) => {
-        return item;
-    })
-    
-    reverseArray.reverse();
-    
-    let answer = checker(arr) >  checker(reverseArray) ? checker(arr) : checker(reverseArray);
-   
-    
-    
-    return answer;
-
-   
-    
-    
-    
-    //returns the length of the greatest number of consecutive checkers
-
+    return result
 };
