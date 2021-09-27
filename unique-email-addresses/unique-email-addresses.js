@@ -3,42 +3,41 @@
  * @return {number}
  */
 var numUniqueEmails = function(emails) {
-    let count = 0;
-    let mem = {};
-    let string = '';
-    for(var i = 0; i < emails.length; i++) {
-        
-        for(var j = 0; j < emails[i].length; j++) {
-            
-            
-             if(emails[i][j] === '+') {
-                let index = emails[i].search('@');
-                let remove = emails[i].substring(j, index);
-                emails[i] = emails[i].split(remove).join('');
-                //console.log(emails[i])
-            }
-            
-            if(emails[i][j] === '@') {
-                
-                let portion = emails[i].substring(0, j);
-                let backPortion = emails[i].substring(j, emails[i].length);
-                console.log(portion);
-                string = portion.split('.').join('') + backPortion;
-            }
-            
-            if (j === emails[i].length - 1) {
-                //this could also be a hash table
-                 mem[string] = string;
-                 string = '';
-            }
-            
-            
-        }
-    }
     
-    for(var keys in mem) {
-        count++;
+    
+    let hash = {};
+    for(let i = 0; i < emails.length; i++) {
+        let validEmail = [];
+        let domain = [];
+        for(let j = 0; j < emails[i].length; j++) {
+            if(emails[i][j] === '.') {
+                continue;
+            }
+            
+            if(emails[i][j] === '@' || emails[i][j] === '+') {
+                break;
+            }
+            
+            if(emails[i][j] !== '@') {
+                validEmail.push(emails[i][j]);
+            }
+        }
+        
+        
+        for(let j = emails[i].length - 1; j >=0; j--) {
+            if(emails[i][j] === '@') {
+                domain.push(emails[i][j]);
+                break;
+            }
+            
+            domain.push(emails[i][j]);
+        }
+        
+        let address = validEmail.join('') + domain.reverse().join('');
+        hash[address] = true;
+        
+        
     }
-    console.log(mem);
-    return count;
+    // console.log(hash);
+    return Object.keys(hash).length;
 };
