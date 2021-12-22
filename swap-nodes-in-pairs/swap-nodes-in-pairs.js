@@ -15,30 +15,24 @@ var swapPairs = function(head) {
     
     //two pointers? one even and one odd
     
-    let sentry = head;
-    let even = head;
-    let odd;
-    if(head !== null) {
-        odd = head.next;
-        //console.log(odd);
-    }
-    //console.log(odd)
+    let dummy = new ListNode(0, head);
+    let prev = dummy;
+    let curr = head;
     
-    while(even !== null && odd !== null) {
-        let temp = odd.val;
-        odd.val = even.val;
-        even.val = temp;
+    
+    while(curr && curr.next ) {
+        let second = curr.next.next;
+        let first = curr.next;
+        first.next = curr;
+        curr.next = second;
+        prev.next = first;
         
-        even = even.next.next;
+        prev = curr;
+        curr = second;
         
-        if(odd.next !== null) {
-            odd = odd.next.next;
-        } else {
-            odd = odd.next;
-        }
         
     }
     
     
-    return sentry; 
+    return dummy.next; 
 };
