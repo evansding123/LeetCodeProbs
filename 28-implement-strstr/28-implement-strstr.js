@@ -7,7 +7,7 @@ var strStr = function(haystack, needle) {
     //if the needle is x length, we need to search in windows of x
     //move the window checking each time. ON is h * n
     
-    if(haystack.length === 0 && needle.length === 0) {
+    if(needle.length === 0) {
         return 0;
     } 
     
