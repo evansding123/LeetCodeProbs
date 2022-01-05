@@ -14,18 +14,6 @@ var searchInsert = function(nums, target) {
     while(left <= right) {
         let mid = Math.floor((left + right) / 2);
         
-        //console.log(left, right, mid)
-        
-        if(left <= right) {
-            //console.log(left, right, mid)
-            if(nums[left] > target) {
-                insert = left;
-            } else {
-                insert = left + 1;    
-            }
-           
-        }
-        
        
         if(nums[mid] === target) {
             return mid;
@@ -43,5 +31,5 @@ var searchInsert = function(nums, target) {
        
     }
     
-    return insert;
+    return left;
 };
