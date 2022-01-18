@@ -3,43 +3,37 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    let window = [];
-    let array = [];
    
-    s = s.split('');
-   
-    const checker = (string) => {
-        let hash = {};
-        for(let i = 0; i < string.length; i++) {
-            if(hash[string[i]] === undefined) {
-                hash[string[i]] = true
-            } else {
-                return false;
-            }
-        }
-        return true;
+    let left = 0;
+    let right = 0;
+    
+    let window = new Set();
+    let max = window.size;
+    
+    if(s.length === 0) {
+        return 0;
     }
     
-    for(let i = 0; i < s.length; i++) {
-        window.push(s[i]);
-       console.log(window)
-        if(checker(window.join(''))) {
-            array.push(window.join(''));
-        } else {
-            window.shift();
-    
+    while(right < s.length) {
+        //have to have two conditionals for when left and right pointers move
+        //console.log(window)
+        while(window.has(s[right])) {
+            window.delete(s[left]);
+            left++;
+        } 
+        
+        window.add(s[right]);
+        
+        if(window.size > max) {
+            max = window.size;
         }
+        
+        right++;
+        
     }
     
-    
-    
-    let max = 0;
-    for(let i = 0; i < array.length; i++) {
-        if(array[i].length > max) {
-            max = array[i].length;
-        }
-    }
-    console.log(array)
+    //console.log(window)
     return max;
+    
     
 };
