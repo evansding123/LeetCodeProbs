@@ -18,6 +18,7 @@ var lengthOfLongestSubstring = function(s) {
         //have to have two conditionals for when left and right pointers move
         //console.log(window)
         while(window.has(s[right])) {
+            //have to remove everything in the set
             window.delete(s[left]);
             left++;
         } 
