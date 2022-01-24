@@ -3,7 +3,20 @@
  * @return {string}
  */
 var originalDigits = function(s) {
-    const arr = new Array(10).fill(0);
+    //const arr = new Array(10).fill(0);
+    let arr = {
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+        7: 0,
+        8: 0,
+        9: 0
+        
+    }
     for (const c of s) {
         if (c === 'z') arr[0]++
         else if (c === 'x') arr[6]++
@@ -22,9 +35,11 @@ var originalDigits = function(s) {
     arr[1] -= arr[0] + arr[2] + arr[4];
     arr[9] -= arr[5] + arr[6] + arr[8];
     let res = "";
+    
+    console.log(arr)
     for (let i = 0; i <=9; i++) {
         //for each number from 1-9, add it into the array depending on how many times it has occurred
-        for (let j = 0; j < arr[i]; j++) {
+        for(let j = 0; j < arr[i]; j++) {
             res += i;
         }
     }
