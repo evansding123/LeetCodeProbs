@@ -4,20 +4,21 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    //if we find the target - nums in the array, that means the two indices add up to target
-    //can either be one pass or two pass
-    //we need a frequency hash to store 
     let hash = {};
-    
+    let result = [];
     for(let i = 0; i < nums.length; i++) {
-        if(hash[nums[i]] === undefined) {
-            hash[nums[i]] = i;
+        let diff = nums[i];
+        if(hash[diff] === undefined) {
+            hash[target - diff] = i;
+            
+        } else {
+            result.push(i, hash[diff])
+            
+            return result;
         }
         
-        if(hash[target - nums[i]] !== undefined && hash[target - nums[i]] !== i) {
-            return [hash[target - nums[i]], i];
-        }
+        
     }
     
-    return [];
+   return result
 };
