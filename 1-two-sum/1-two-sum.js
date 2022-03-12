@@ -4,21 +4,14 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    let hash = {};
-    let result = [];
-    for(let i = 0; i < nums.length; i++) {
-        let diff = nums[i];
-        if(hash[diff] === undefined) {
-            hash[target - diff] = i;
-            
-        } else {
-            result.push(i, hash[diff])
-            
-            return result;
-        }
-        
-        
+    var map = {};
+    for(var i = 0; i < nums.length; i++) {
+        map[nums[i]] = i;
     }
-    
-   return result
+    for(var j = 0; j < nums.length; j++) {
+        var complement = target - nums[j];
+        if(map[complement] && map[complement] !== j) {
+            return [j, map[complement]];
+        }
+    }
 };
