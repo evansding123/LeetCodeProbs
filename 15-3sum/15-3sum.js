@@ -28,7 +28,7 @@ var threeSum = function(nums) {
                     hash[target - curr] = j
                 } else if(i !== j) {
                     result.push([nums[i], nums[j], nums[hash[curr]]])
-                    console.log(i, j)
+                    
                     while(j + 1 < nums.length && nums[j] === nums[j + 1]) {
                         j++
                         //console.log(nums[j])
