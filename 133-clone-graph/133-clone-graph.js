@@ -26,7 +26,7 @@ var cloneGraph = function(node) {
         
         let newNode = new Node(root.val, []);
         hash[root.val] = newNode;
-      
+      //if the neighbor is already in hash table, push the node in the hash into the neighbor array
        for(neighbor of root.neighbors) {
            newNode.neighbors.push(dfs(neighbor));
        }
