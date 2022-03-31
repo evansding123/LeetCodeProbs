@@ -3,34 +3,31 @@
  * @return {number}
  */
 var maxArea = function(height) {
-    //want the highest height (height[i]) and longest possible difference in i 
-    //two pointers, find the min between them each time. multiply by difference in i and store it in hashmap
-    let left = 0;
-    let right = height.length - 1;
+    let first = 0;
+    
+    let last = height.length - 1;
+    
     let maxArea = 0;
-    
-    
-    while(left < right) {
-        let max = Math.min(height[left], height[right]);
+    while(last > first) {
+        let currHeight = Math.min(height[first], height[last]);
+        let width = last - first;
         
-        let length = Math.abs(right - left);
+        let area = currHeight * width;
         
-        let area = max * length;
+        maxArea = Math.max(area, maxArea);
         
         
-        if(area > maxArea) {
-            maxArea = area;
-        }
         
-        //console.log(height[right - 1], height[left + 1], right - left)
-        
-        if(height[left] > height[right]) {
-            right--;
+        if(height[last] >height[first]) {
+            first++
         } else {
-            left++;
+            last--
         }
+        
+       
+        
+        
     }
-    
     
     return maxArea;
 };
