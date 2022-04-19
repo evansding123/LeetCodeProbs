@@ -3,40 +3,39 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    //probably have to create a hash table to keep track of unique letters 
-    //have a sliding window with two pointers 
+    //iterate through the string with two pointers
+    //add whatever the pointers are on to the has table
     
-    let first = 0;
-    let last = 1;
+    let left = 0;
+    
+    let right = 1;
+    
+    let max = 1;
+    
     let hash = {};
-    let longest = 0;
     
-    //if hash of letter already exists, 
-    hash[s[first]] = 1;
+    hash[s[left]] = 1;
     
-    if(s.length === 1) {
-        return 1;
+    if(s.length === 0) {
+        return 0;
     }
     
-    while(last < s.length) {
-        
-        if(hash[s[last]] === undefined) {
-            hash[s[last]] = 1;
-            
-        } else if(hash[s[last]] !== undefined) {
-            hash[s[last]]++;
+    while(right < s.length) {
+        if(hash[s[right]] === undefined) {
+            hash[s[right]] = 1;
+        } else {
+            hash[s[right]]++;
         }
         
-        while(hash[s[last]] > 1) {
-            hash[s[first]]--;
-            first++;
+        while(hash[s[right]] > 1) {
+            hash[s[left]]--;
+            left++;
         }
         
-        let subLength = last - first + 1;
+        max = Math.max(max, right - left + 1);
         
-        longest = Math.max(longest, subLength);
-        last++;
+        right++;
     }
     
-    return longest;
+    return max;
 };
