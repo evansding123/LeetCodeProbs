@@ -12,7 +12,7 @@ var lengthOfLongestSubstring = function(s) {
     
     let max = 1;
     
-    let hash = {};
+    const hash = {};
     
     hash[s[left]] = 1;
     
