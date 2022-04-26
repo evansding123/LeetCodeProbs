@@ -9,7 +9,7 @@ var merge = function(intervals) {
     //can determine if they are overalapping  if the first index of the second tuple is greater than second index of the first
     
     
-    const result = [];
+  
     let i = 0;
     
     intervals.sort((a, b) => {
