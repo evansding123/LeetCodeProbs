@@ -60,7 +60,7 @@ var unhappyFriends = function(n, preferences, pairs) {
             let ratings = col[keys][i];
             
             if(hash2[keys] === undefined && ratings !== null && ratings < hash[keys] && col[i][keys]< hash[i]) {
-                console.log(keys,ratings, hash[keys], col[i][keys], hash[i])
+                //console.log(keys,ratings, hash[keys], col[i][keys], hash[i])
                 count+= 1
                 hash2[keys] = true;
             }
