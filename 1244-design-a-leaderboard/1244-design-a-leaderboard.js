@@ -1,6 +1,6 @@
 
 var Leaderboard = function() {
-    this.board = [];
+    this.board = {};
     this.players = {};
 };
 
@@ -11,15 +11,21 @@ var Leaderboard = function() {
  */
 Leaderboard.prototype.addScore = function(playerId, score) {
     
-    for(let i = 0; i < this.board.length; i++) {
-        if(this.board[i][0] === playerId) {
-            this.board[i][1] += score;
-            return;
-        }
+//     for(let i = 0; i < this.board.length; i++) {
+//         if(this.board[i][0] === playerId) {
+//             this.board[i][1] += score;
+//             return;
+//         }
+//     }
+    
+    
+//     this.board.push([playerId, score]);
+    
+    if(this.board[playerId] === undefined) {
+        this.board[playerId] = score
+    } else {
+        this.board[playerId] += score;
     }
-    
-    
-    this.board.push([playerId, score]);
    
 };
 
@@ -28,15 +34,20 @@ Leaderboard.prototype.addScore = function(playerId, score) {
  * @return {number}
  */
 Leaderboard.prototype.top = function(K) {
-    this.board.sort((a,b) => {
-        return b[1] - a[1];
+    
+    const arrayBoard = Object.keys(this.board);
+    arrayBoard.sort((a,b) => {
+       
+        return this.board[b] - this.board[a];
     })
+    
+   
     
     let count = 0;
     
     for(let i = 0; i < K; i++) {
         
-        count+= this.board[i][1];
+        count+= this.board[arrayBoard[i]];
     }
     
     return count;
@@ -47,11 +58,13 @@ Leaderboard.prototype.top = function(K) {
  * @return {void}
  */
 Leaderboard.prototype.reset = function(playerId) {
-    for(let i = 0; i < this.board.length; i++) {
-        if(this.board[i][0] === playerId) {
-            this.board[i] = [0,0];
-        }
-    }
+    // for(let i = 0; i < this.board.length; i++) {
+    //     if(this.board[i][0] === playerId) {
+    //         this.board[i] = [0,0];
+    //     }
+    // }
+    
+    delete this.board[playerId];
 };
 
 /** 
