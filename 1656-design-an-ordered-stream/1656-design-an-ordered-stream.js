@@ -2,8 +2,9 @@
  * @param {number} n
  */
 var OrderedStream = function(n) {
-   this.stream = new Array(n)
-   this.pointer = 0;
+    this.stream = new Array(n);
+    this.pointer = 0;
+   
 };
 
 /** 
@@ -12,21 +13,15 @@ var OrderedStream = function(n) {
  * @return {string[]}
  */
 OrderedStream.prototype.insert = function(idKey, value) {
-    const result = [];
-    this.stream[idKey - 1] = value
-   if(this.pointer === idKey - 1) {
-       while(this.stream[this.pointer]) {
-           result.push(this.stream[this.pointer]);
-           this.pointer++
-       }
-       
-       return result;
-   } else {
-       return [];
-   }
+    this.stream[idKey - 1] = value;
+    // console.log(this.stream)
+    let result = [];
+    while(this.stream[this.pointer] !== undefined) {
+        result.push(this.stream[this.pointer]);
+        this.pointer++;
+    }
     
-    
-    
+    return result;
 };
 
 /** 
