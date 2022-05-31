@@ -3,20 +3,24 @@
  * @return {number}
  */
 var climbStairs = function(n) {
+    
     let memo = {};
-    const recurse = (i, n) => {
-        if(i > n) {
+    const recurse = (i, length) => {
+        
+        
+        if(memo[i] !== undefined) {
+            return memo[i];
+        }
+        if(i > length) {
             return 0;
         }
-        if(i === n) {
+        
+        if(i === length) {
             return 1;
         }
         
-        if(memo[i] > 0) {
-            return memo[i]
-        }
-        memo[i] = recurse(i + 1, n) + recurse(i + 2, n)
-        return memo[i]
+        memo[i] = recurse(i + 1, length) + recurse(i + 2, length);
+        return memo[i];
     }
     
     return recurse(0, n);
